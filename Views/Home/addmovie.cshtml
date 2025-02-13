@@ -1,0 +1,74 @@
+﻿@model MovieCollectionApp.Models.Movie
+@{
+    ViewData["Title"] = "Add Movie";
+}
+
+
+<h1>Add a New Movie</h1>
+
+<!-- Display model validation errors (e.g., required fields) -->
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<!-- The form posts to the 'AddMovie' action on the 'Movies' controller (adjust as needed) -->
+<form asp-action="AddMovie" asp-controller="Home" method="post">
+
+    <!-- CATEGORY (required) -->
+    <div class="form-group mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <input asp-for="Category" class="form-control" />
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <!-- TITLE (required) -->
+    <div class="form-group mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <!-- YEAR (required) -->
+    <div class="form-group mb-3">
+        <label asp-for="Year" class="form-label"></label>
+        <input asp-for="Year" class="form-control" type="number" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    <!-- DIRECTOR (required) -->
+    <div class="form-group mb-3">
+        <label asp-for="Director" class="form-label"></label>
+        <input asp-for="Director" class="form-control" />
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    <!-- RATING (required) - Dropdown -->
+    <div class="form-group mb-3">
+        <label asp-for="Rating" class="form-label"></label>
+        <select asp-for="Rating" class="form-select"
+                asp-items="@(new SelectList(new[] { "G", "PG", "PG-13", "R" }))">
+            <option value="">--Select Rating--</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <!-- EDITED (optional) - Yes/No (true/false) using a checkbox -->
+    <div class="form-check mb-3">
+        <input asp-for="Edited" class="form-check-input" type="checkbox" />
+        <label asp-for="Edited" class="form-check-label"></label>
+    </div>
+
+    <!-- LENT TO (optional) -->
+    <div class="form-group mb-3">
+        <label asp-for="LentTo" class="form-label"></label>
+        <input asp-for="LentTo" class="form-control" />
+        <span asp-validation-for="LentTo" class="text-danger"></span>
+    </div>
+
+    <!-- NOTES (optional) - up to 25 characters -->
+    <div class="form-group mb-3">
+        <label asp-for="Notes" class="form-label"></label>
+        <input asp-for="Notes" class="form-control" maxlength="25" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Movie</button>
+</form>
