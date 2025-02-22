@@ -1,34 +1,29 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieCollectionApp.Models
 {
+    [Table("Movies")]
     public class Movie
     {
         [Key]
-        [Required]
         public int MovieId { get; set; }
 
-        [Required]
-        public string Category { get; set; } = null!; // or make it nullable/required property
-        
-        [Required]
-        public string Title { get; set; } = null!;
+        public int? CategoryId { get; set; }
 
         [Required]
+        public string Title { get; set; } = "";
+
+        [Range(1888, 2100, ErrorMessage = "Year must be >= 1888.")]
         public int Year { get; set; }
 
-        [Required]
-        public string Director { get; set; } = null!;
-
-        [Required]
-        public string Rating { get; set; } = null!;
-
-        // Optional fields
-        public bool Edited { get; set; } // no longer nullable
-
+        public string? Director { get; set; }
+        public string? Rating { get; set; }
+        public bool Edited { get; set; }
         public string? LentTo { get; set; }
 
-        [StringLength(25)]
-        public string? Notes { get; set; }  // also consider making it nullable
+        [Required]
+        public bool CopiedToPlex { get; set; }
+        public string? Notes { get; set; }
     }
 }

@@ -1,52 +1,108 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - MovieCollectionApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/MovieCollectionApp.styles.css" asp-append-version="true"/>
+    <meta charset="utf-8" />
+    <!-- Ensures responsive resizing on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>@ViewData["Title"] - Joel Hilton</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
+    <!-- Your site-wide CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MovieCollectionApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="addmovie">Add Movie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="joel">Get to Know Joel</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
+    <header>
+        <!-- 
+            A standard Bootstrap navbar:
+            - "navbar-expand-sm" means it collapses into a toggler on small screens 
+            - "navbar-light bg-white" for light text on a white background 
+            - "border-bottom box-shadow mb-3" for some subtle styling 
+        -->
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <!-- Brand/Home link -->
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    MovieCollectionApp
+                </a>
+                
+                <!-- Toggler: in Bootstrap 5, use data-bs- attributes -->
+                <button class="navbar-toggler" type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#mainNavbar" 
+                        aria-controls="mainNavbar" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-<footer class="border-top footer text-muted">
+                <!-- Collapsible section for nav links -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" 
+                               asp-controller="Home" 
+                               asp-action="Index">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" 
+                               asp-controller="Home" 
+                               asp-action="AddMovie">
+                                Add Movie
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" 
+                               asp-controller="Home" 
+                               asp-action="Joel">
+                                Get to Know Joel
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" 
+                               asp-controller="Home" 
+                               asp-action="MovieList">
+                                Movie Database
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 
+        "container" is a common Bootstrap class that
+        gives a responsive fixed-width container on larger screens.
+        "container-fluid" goes full width if you prefer.
+    -->
     <div class="container">
-        &copy; Christian Christensen 2025 - Joel's Movie Collection - <a asp-area="" asp-controller="Home" asp-action="joel">Get to Know Joel</a>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
-</footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container">
+            &copy; 2025 MovieCollectionApp - 
+            <a asp-controller="Home" asp-action="Joel">Get to Know Joel</a>
+        </div>
+    </footer>
+
+    <!-- jQuery (if needed) -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    <!-- Bootstrap 5 JS (includes Popper) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Your site-wide JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <!-- Optionally render more scripts from child views -->
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

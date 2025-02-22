@@ -5,15 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1) Register the MovieDbContext with EF Core + SQLite
 builder.Services.AddDbContext<MovieDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 2) Add services for MVC
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddDbContext<MovieDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("MovieConnection"));
-});
 
 var app = builder.Build();
 
@@ -24,6 +19,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapControllerRoute(
+    name: "movies",
+    pattern: "{controller=Movies}/{action=MovieList}/{id?}");
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -33,5 +33,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
+
+
 
 app.Run();
